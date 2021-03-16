@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>VimTricks</title>
+	<atom:link href="https://vimtricks.com/feed/" rel="self" type="application/rss+xml" />
+	<link>https://vimtricks.com</link>
+	<description>Vim tips and tricks</description>
+	<lastBuildDate>Thu, 11 Mar 2021 12:55:55 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.6.2</generator>
+
+<image>
+	<url>https://vimtricks.com/wp-content/uploads/2020/11/cropped-logo-black-32x32.png</url>
+	<title>VimTricks</title>
+	<link>https://vimtricks.com</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Copying and pasting lines</title>
+		<link>https://vimtricks.com/p/copying-and-pasting-lines/</link>
+					<comments>https://vimtricks.com/p/copying-and-pasting-lines/#respond</comments>
+		
+		<dc:creator><![CDATA[Colin Bartlett]]></dc:creator>
+		<pubDate>Thu, 11 Mar 2021 12:23:11 +0000</pubDate>
+				<category><![CDATA[Tips and Tricks]]></category>
+		<guid isPermaLink="false">https://vimtricks.com/?p=998</guid>
+
+					<description><![CDATA[<p>Use ex commands in Vim to copy lines around without moving.</p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/copying-and-pasting-lines/" data-wpel-link="internal">Copying and pasting lines</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I often need to duplicate whole lines in my code, especially when writing CSS. The slow way is to navigate to the line I want, yank it, go back and paste it. The most efficient way I can think to do that is to jump by searching with <code>/</code> and pressing <code>&lt;CR></code>. Then yank the line with <code>yy</code>. Then use the jump list, <code>&lt;ctrl-o></code>, to bounce back. And press <code>p</code> to paste the line below or <code>P</code> to paste the line above. Let&#8217;s watch a screencast of this method first:</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://vimtricks.com/wp-content/uploads/2021/03/copy-line-before.mp4"></video></figure>
+
+
+
+<p>But there is another way! And it doesn&#8217;t involve moving around at all. In fact, your cursor can stay in the same place and you can do this with one command, the ex <code>:yank</code> command:</p>
+
+
+
+<ul><li><code>:&lt;line number&gt;yank</code> &#8211; copies the line number specified to your default register</li></ul>
+
+
+
+<p>Once you&#8217;ve yanked, just paste with <code>p</code> or <code>P</code> and you&#8217;re done. But wait, there&#8217;s more! There&#8217;s an even better way. Use the ex <code>:copy</code> command:</p>
+
+
+
+<ul><li><code>:&lt;line number&gt;copy.</code> &#8211; copies the line number specified<em> and </em>pastes it to the line below</li></ul>
+
+
+
+<p>Now you&#8217;ve done the whole operation in a single command. But we&#8217;re not done yet! The ex <code>:copy</code> command has an alias <code>t</code>. Putting it all together:</p>
+
+
+
+<ul><li><code>:&lt;line number&gt;t.</code> &#8211; copies the line number specified<em> and </em>pastes it to the line below</li></ul>
+
+
+
+<p>You can also use <code>+</code> or <code>-</code> before the line number to turn it into a relative line number. Or even use a range of lines with a comma. Here are some examples of this in action:</p>
+
+
+
+<ul><li><code>:281t.</code> &#8211; Copy line 281 and paste it below the current line</li><li><code>:-10t.</code> &#8211; Copy the line 10 lines above the current line and paste it below the current line</li><li><code>:+8t.</code> &#8211; Copy the line 8 lines after the current line and paste it below</li><li><code>:10,20t.</code> &#8211; Copy lines 10 to 20 and paste them below</li><li><code>:t20 </code>&#8211; Copy the current line and paste it below line 20</li></ul>
+
+
+
+<p>Now here&#8217;s a screencast of the same operation I did in the beginning, but using this new method:</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://vimtricks.com/wp-content/uploads/2021/03/copy-line-after.mp4"></video></figure>
+
+
+
+<p></p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/copying-and-pasting-lines/" data-wpel-link="internal">Copying and pasting lines</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://vimtricks.com/p/copying-and-pasting-lines/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		<enclosure url="https://vimtricks.com/wp-content/uploads/2021/03/copy-line-before.mp4" length="155722" type="video/mp4" />
+<enclosure url="https://vimtricks.com/wp-content/uploads/2021/03/copy-line-after.mp4" length="113644" type="video/mp4" />
+
+			</item>
+		<item>
+		<title>Highlight specific lines</title>
+		<link>https://vimtricks.com/p/highlight-specific-lines/</link>
+					<comments>https://vimtricks.com/p/highlight-specific-lines/#respond</comments>
+		
+		<dc:creator><![CDATA[Colin Bartlett]]></dc:creator>
+		<pubDate>Mon, 08 Mar 2021 13:20:08 +0000</pubDate>
+				<category><![CDATA[Tips and Tricks]]></category>
+		<category><![CDATA[vimrc]]></category>
+		<guid isPermaLink="false">https://vimtricks.com/?p=989</guid>
+
+					<description><![CDATA[<p>Use this Vim mapping to add line highlights that persist when moving around.</p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/highlight-specific-lines/" data-wpel-link="internal">Highlight specific lines</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I often pair program remotely with colleagues over a screen share. (Shout out to <a href="https://tuple.app/" data-wpel-link="external" rel="external noopener noreferrer">Tuple</a>, hands down the best pair programming app.) When I&#8217;m driving and sharing my screen, I often want to call attention to a certain line to my remote pair. Usually,  I just press <code>shift-V</code> to visually select the current line. This does the job, but the highlighting disappears as soon as I move my cursor.</p>
+
+
+
+<p>I recently added two new mappings that let me highlight a specific line or lines. The highlights persist as I move around the screen, allowing me to draw attention to a line or multiple lines. Whether pairing or just working on my own, having a specific area highlighted temporarily can be of great benefit. Here&#8217;s how I do it:</p>
+
+
+
+<pre class="wp-block-code"><code>" define line highlight color
+highlight LineHighlight ctermbg=darkgray guibg=darkgray
+
+" highlight the current line
+nnoremap &lt;silent> &lt;Leader>l :call matchadd('LineHighlight', '\%'.line('.').'l')&lt;CR>
+
+" clear all the highlighted lines
+nnoremap &lt;silent> &lt;Leader>c :call clearmatches()&lt;CR></code></pre>
+
+
+
+<p>With these mappings added to my <code>.vimrc</code>, I can press <code>&lt;Leader&gt;l</code> (mnemonic is &#8220;line&#8221;) to highlight the current line. I can move to another line and repeat to highlight that line as well. And then when I&#8217;m done, I can clear all the highlights in the buffer by pressing <code>&lt;Leader&gt;c</code> (mnemonic is &#8220;clear&#8221;).</p>
+
+
+
+<p>Check out the short screencast below where I demonstrate this in action. Do you pair program much with Vim? I&#8217;d be curious to hear what setup you use and what configuration, mappings, or plugins aid you when doing so. <a href="mailto:hi@vimtricks.com">Email us</a> or post a comment on the post.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://vimtricks.com/wp-content/uploads/2021/03/highlight-specific-lines.mp4"></video></figure>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/highlight-specific-lines/" data-wpel-link="internal">Highlight specific lines</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://vimtricks.com/p/highlight-specific-lines/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		<enclosure url="https://vimtricks.com/wp-content/uploads/2021/03/highlight-specific-lines.mp4" length="330817" type="video/mp4" />
+
+			</item>
+		<item>
+		<title>Swap Ruby block styles</title>
+		<link>https://vimtricks.com/p/swap-ruby-block-styles/</link>
+					<comments>https://vimtricks.com/p/swap-ruby-block-styles/#respond</comments>
+		
+		<dc:creator><![CDATA[Andy Libby]]></dc:creator>
+		<pubDate>Thu, 04 Mar 2021 13:08:11 +0000</pubDate>
+				<category><![CDATA[Tips and Tricks]]></category>
+		<guid isPermaLink="false">https://vimtricks.com/?p=980</guid>
+
+					<description><![CDATA[<p>Swap Ruby block styles with the Blockle plugin.</p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/swap-ruby-block-styles/" data-wpel-link="internal">Swap Ruby block styles</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I do a respectable amount of software development in Ruby. In Ruby, code blocks can be surrounded by the curly braces or <code>begin</code> and <code>end</code> keywords.  The following two code examples are equivalent functionally: </p>
+
+
+
+<pre id="block-1594cb86-87e8-42f9-873b-bf74cb788d8c" class="wp-block-code"><code>@collection.each { |item| puts item }
+
+@collection.each do |item|
+  puts item
+end</code></pre>
+
+
+
+<p>The former style works well when the code block contains one statement and is simple to understand.  But as code blocks become more complex blocks will grow to span more lines or statements.  A generally accepted (and expected) convention is to switch from braced to <code>begin</code> and <code>end</code> when the code increases beyond a single statement.   I do this often enough to grow tired of the tediousness.  Fortunately there is a super vim plugin called <a href="https://github.com/jgdavey/vim-blockle" data-wpel-link="external" rel="external noopener noreferrer">Blockle</a> which makes this tedious operation a simple leader mapping.</p>
+
+
+
+<p>With the cursor on a <code>{</code>, <code>}</code>, <code>begin</code>, or <code>end</code> keyword  <code>&lt;leader>b</code> will switch between curly braces and <code>begin</code> and <code>end</code>.  In practice it seems to work best on the open curly brace and begin.</p>
+
+
+
+<p>See the example below where I use <code>space b</code> (space is my leader character) to toggle between braces and <code>begin</code> and <code>end</code>.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://vimtricks.com/wp-content/uploads/2021/03/block-brace.mp4"></video></figure>
+
+
+
+<p></p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/swap-ruby-block-styles/" data-wpel-link="internal">Swap Ruby block styles</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://vimtricks.com/p/swap-ruby-block-styles/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		<enclosure url="https://vimtricks.com/wp-content/uploads/2021/03/block-brace.mp4" length="40619" type="video/mp4" />
+
+			</item>
+		<item>
+		<title>Accessing man pages</title>
+		<link>https://vimtricks.com/p/accessing-man-pages/</link>
+					<comments>https://vimtricks.com/p/accessing-man-pages/#comments</comments>
+		
+		<dc:creator><![CDATA[Colin Bartlett]]></dc:creator>
+		<pubDate>Mon, 01 Mar 2021 12:54:01 +0000</pubDate>
+				<category><![CDATA[Tips and Tricks]]></category>
+		<category><![CDATA[man]]></category>
+		<guid isPermaLink="false">https://vimtricks.com/?p=971</guid>
+
+					<description><![CDATA[<p>Access man pages without leaving Vim</p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/accessing-man-pages/" data-wpel-link="internal">Accessing man pages</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Did you know you can access man pages from Vim? That&#8217;s right, the richly detailed help documentation provided by Unix is available right from with Vim:</p>
+
+
+
+<ul><li>Press <code>&lt;leader&gt;K</code> on top of any keyword in any file and Vim will open the man page for that program.</li><li><code>:Man</code> some_program &#8211; Since I don&#8217;t often have the names of various Unix utilities written out in my software, using <code>:Man</code> is a bit more practical.</li></ul>
+
+
+
+<p>When is this useful? The first can be useful when reading README files, as those sometimes have various executables written out inside of them. I&#8217;ve used this on occasion. Do you edit shell scripts often from Vim? Then <code>&lt;leader&gt;K</code> can really come in handy for you.</p>
+
+
+
+<p>But <code>:Man</code> has a bit more utility for me. If you&#8217;re like me, you try to stay in Vim for as much as of your workflow as possible. When editing text, you might be shelling out from Vim and using normal Unix command line tools, each of which has their documentation in the man pages.</p>
+
+
+
+<p>I also like to stay inside of Vim for all my Git operations. Doing so drastically improves my workflow as I avoid context switching back to a terminal. (<a href="https://gumroad.com/vimtricks#hsOVI" data-wpel-link="external" rel="external noopener noreferrer">We wrote a whole course about this!</a>) If I&#8217;m ever unsure about a particular Git command, I can access Git&#8217;s man pages without leaving Vim. For example:</p>
+
+
+
+<ul><li><code>:Man git-log</code> &#8211; Show all the various <code>git log</code> options and documentation, without leaving Vim.</li></ul>
+
+
+
+<p>To make <code>:Man</code> work, you just need to enable this capability inside your <code>.vimrc</code> with the following line:</p>
+
+
+
+<pre class="wp-block-code"><code>runtime ftplugin/man.vim</code></pre>
+
+
+
+<p>In the example video below I show you both of these. I happen to have the Ruby package management program <code>bundler</code> mentioned in this README. By pressing <code>\K</code> when on top of <code>bundler</code>, I open the man page for <code>bundler</code>. Next, I check the documentation for git log by running <code>:Man git-log</code>.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://vimtricks.com/wp-content/uploads/2021/03/accessing-man-pages.mp4"></video></figure>
+
+
+
+<p></p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/accessing-man-pages/" data-wpel-link="internal">Accessing man pages</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://vimtricks.com/p/accessing-man-pages/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		<enclosure url="https://vimtricks.com/wp-content/uploads/2021/03/accessing-man-pages.mp4" length="338002" type="video/mp4" />
+
+			</item>
+		<item>
+		<title>Creating files and directories</title>
+		<link>https://vimtricks.com/p/creating-files-and-directories/</link>
+					<comments>https://vimtricks.com/p/creating-files-and-directories/#respond</comments>
+		
+		<dc:creator><![CDATA[Colin Bartlett]]></dc:creator>
+		<pubDate>Thu, 25 Feb 2021 12:41:50 +0000</pubDate>
+				<category><![CDATA[Tips and Tricks]]></category>
+		<category><![CDATA[netrw]]></category>
+		<guid isPermaLink="false">https://vimtricks.com/?p=965</guid>
+
+					<description><![CDATA[<p>Use Vim's netrw file tree to quickly create files and directories.</p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/creating-files-and-directories/" data-wpel-link="internal">Creating files and directories</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Vim&#8217;s built in file browser, netrw, has <a href="https://vimtricks.com/p/tag/netrw/" data-wpel-link="internal">a multitude of uses</a>. One oft-overlooked capability is the ability to create files and folders from inside its directory view. Without netrw, I&#8217;d need to use:</p>
+
+
+
+<ul><li><code>!mkdir path/to/dir</code> &#8211; Make new directories by shelling out</li><li><code>:e path/to/dir/file.txt</code> &#8211; Open a new buffer at the file path</li></ul>
+
+
+
+<p>But netrw gives us a better way and it works from any directory view. I usually open Vim with <code>vim .</code> which pops me right into the netrw view. From here, I can create new files or directories:</p>
+
+
+
+<ul><li><code>%</code> &#8211; Create new file from netrw</li><li><code>d</code> &#8211; Create new directory from netrw</li></ul>
+
+
+
+<p>If you&#8217;re in a buffer and want to hop back to the file tree, just use <code>:e .</code> and you&#8217;ll be placed in a view of the current working directory. From here, you can browse and create a new file or folder exactly where you want it.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://vimtricks.com/wp-content/uploads/2021/02/create-files-and-directories.mp4"></video></figure>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/creating-files-and-directories/" data-wpel-link="internal">Creating files and directories</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://vimtricks.com/p/creating-files-and-directories/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		<enclosure url="https://vimtricks.com/wp-content/uploads/2021/02/create-files-and-directories.mp4" length="508928" type="video/mp4" />
+
+			</item>
+		<item>
+		<title>Open URL under cursor</title>
+		<link>https://vimtricks.com/p/open-url-under-cursor/</link>
+					<comments>https://vimtricks.com/p/open-url-under-cursor/#comments</comments>
+		
+		<dc:creator><![CDATA[Colin Bartlett]]></dc:creator>
+		<pubDate>Mon, 22 Feb 2021 12:57:42 +0000</pubDate>
+				<category><![CDATA[Tips and Tricks]]></category>
+		<category><![CDATA[netrw]]></category>
+		<guid isPermaLink="false">https://vimtricks.com/?p=949</guid>
+
+					<description><![CDATA[<p>Use netrw's gx mapping to open URLs from Vim. (Try this fix if yours is broken!)</p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/open-url-under-cursor/" data-wpel-link="internal">Open URL under cursor</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Vim includes several bundled plugins, one of which is netrw. We&#8217;ve <a href="https://vimtricks.com/p/tag/netrw/" data-wpel-link="internal">written lots about netrw</a> before including its ability to browse directories. Another feature of netrw is the ability to open the URL that&#8217;s under your cursor in your system&#8217;s default web browser.</p>
+
+
+
+<p>To open the URL under your cursor, just press <code>gx</code>.  You can imagine many places this is useful, especially if you use Vim for note-taking. I use it often to open URLs mentioned in code comments such as links to issues.</p>
+
+
+
+<p>There&#8217;s one problem, however: The feature has been broken in recent versions of Vim, dating back to 2019. But there is a <a href="https://github.com/vim/vim/issues/4738#issuecomment-777050196" data-wpel-link="external" rel="external noopener noreferrer">workaround</a>. Add this to your <code>.vimrc</code>, designed to work on Mac with it&#8217;s <code>open</code> command:</p>
+
+
+
+<pre class="wp-block-code"><code>function! OpenURLUnderCursor()
+  let s:uri = expand('&lt;cWORD&gt;')
+  let s:uri = substitute(s:uri, '?', '\\?', '')
+  let s:uri = shellescape(s:uri, 1)
+  if s:uri != ''
+    silent exec "!open '".s:uri."'"
+    :redraw!
+  endif
+endfunction
+nnoremap gx :call OpenURLUnderCursor()&lt;CR&gt;</code></pre>
+
+
+
+<p>If you&#8217;re on Linux, try changing <code>!open</code> to <code>!gio</code>.</p>
+
+
+
+<p>With this hack in my <code>.vimrc</code>, the normal <code>gx</code> function works perfectly again on Mac. Hopefully future versions of Vim will fix this and make the workaround obsolete. In the interim, you can avoid going to your mouse or yanking the URL and manualling pasting into your browser by using this workaround.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://vimtricks.com/wp-content/uploads/2021/02/open-url-in-browser.mp4"></video></figure>
+
+
+
+<p></p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/open-url-under-cursor/" data-wpel-link="internal">Open URL under cursor</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://vimtricks.com/p/open-url-under-cursor/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		<enclosure url="https://vimtricks.com/wp-content/uploads/2021/02/open-url-in-browser.mp4" length="329284" type="video/mp4" />
+
+			</item>
+		<item>
+		<title>Display hidden characters</title>
+		<link>https://vimtricks.com/p/display-hidden-characters/</link>
+					<comments>https://vimtricks.com/p/display-hidden-characters/#respond</comments>
+		
+		<dc:creator><![CDATA[Colin Bartlett]]></dc:creator>
+		<pubDate>Thu, 18 Feb 2021 12:58:31 +0000</pubDate>
+				<category><![CDATA[Tips and Tricks]]></category>
+		<guid isPermaLink="false">https://vimtricks.com/?p=951</guid>
+
+					<description><![CDATA[<p>Use list and listchars to display otherwise hidden characters.</p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/display-hidden-characters/" data-wpel-link="internal">Display hidden characters</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>A fixture of many <code>.vimrc</code> files, Vim&#8217;s <code>list</code> and <code>listchars</code> option can be enabled to show hidden characters such as line breaks, tabs, non-breaking spaces, trailing whitespace, and more. By default <code>list</code> is not enabled, but you can enable it with <code>set list</code> in your <code>.vimrc</code>.</p>
+
+
+
+<p>From there, you have a number of options you can configure to your liking using the <code>listchars</code> setting. The most commonly used are <code>tab</code> and <code>trail</code> which will set a character to display in place of tabs and trailing line spaces respectively. Here&#8217;s how we can set those:</p>
+
+
+
+<pre class="wp-block-code"><code>" enable list mode
+set list
+
+" display chars for tabs and trailing spaces
+set listchars=tab:&gt; ,trail:-</code></pre>
+
+
+
+<p>The format of the <code>listchars</code> option is a comma-separated list of key/value pairs where the key and value are separated by a colon. Most of the options keys, which I&#8217;ll list below, accept only one character value. This is the character is displayed in place of the hidden one.</p>
+
+
+
+<p>But <code>tab</code> can take either 2 or 3 characters. In my example above, I&#8217;ve used 2: a greater than and a space. When 2 characters are used, the first one is displayed in place of the first character of the tab width. The second character is filled in the rest of the way up to the width set by the <code>tabstop</code> setting.</p>
+
+
+
+<p>If you specify 3 characters for your <code>tab</code> <code>listchars</code>, then the first is displayed in the first position, the last is displayed in the last position, and the middle character is used to fill all the spaces in between.</p>
+
+
+
+<p>The <code>trail</code> option is another commonly used <code>listchars</code> which we discuss in our post about how to <a href="https://vimtricks.com/p/vimtrick-trim-trailing-whitespace/" data-wpel-link="internal">trim trailing whitespace</a>. Any whitespace character hanging at the end of the line will transform into the character you set, making it easier to see those pesky dangling spaces.</p>
+
+
+
+<p>In addition to those two highly recommended <code>listchars</code> values, the setting supports of host of other cases. You can read the full details under <code>:help listchars</code> but here&#8217;s a summary of the remaining:</p>
+
+
+
+<ul><li><code>eol</code> &#8211; Shows line break characters. For example, a return symbol: ⏎</li><li><code>space</code> &#8211; Space can be displayed for those that need it. You could use a middle dot: ·</li><li><code>extends</code> &#8211; Used to indicate there is text to the right when you have line wrapping disabled with <code>set nowrap</code></li><li><code>precedes</code> &#8211; Same, but for the text hidden to the left</li><li><code>conceal</code> &#8211; In Vim 7.3 and above with the <code>conceal</code> features compiled in, Vim can conceal certain text. See <code>:conceallevel</code>.</li><li><code>nbsp</code> &#8211; Displayed in place of a non-breaking space. I recommend you set this to a middle dot · so you can distinguish from regular breaking spaces.</li></ul>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/display-hidden-characters/" data-wpel-link="internal">Display hidden characters</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://vimtricks.com/p/display-hidden-characters/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Go to next match and select</title>
+		<link>https://vimtricks.com/p/go-to-next-match-and-select/</link>
+					<comments>https://vimtricks.com/p/go-to-next-match-and-select/#comments</comments>
+		
+		<dc:creator><![CDATA[Colin Bartlett]]></dc:creator>
+		<pubDate>Mon, 15 Feb 2021 13:24:52 +0000</pubDate>
+				<category><![CDATA[Tips and Tricks]]></category>
+		<category><![CDATA[replace]]></category>
+		<category><![CDATA[text-objects]]></category>
+		<guid isPermaLink="false">https://vimtricks.com/?p=945</guid>
+
+					<description><![CDATA[<p>Use gn to build up repeatable operations on searched patterns.</p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/go-to-next-match-and-select/" data-wpel-link="internal">Go to next match and select</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>In Vim, the previous action can be repeated with the dot command. This is how Vim power users can get so much done so quickly: Structuring their operations into commands that can simply be repeated with a tap of  the <code>.</code> character. The <code>gn</code> command is one oft-overlooked Vim command (added in version 7.4) that can help build repeatable <a href="https://vimtricks.com/p/tag/replace/" data-wpel-link="internal">replacement</a> operations.</p>
+
+
+
+<p>To find a matching pattern in Vim, we simply use the <code>/</code> command. Type <code>/foo</code> and Vim will find the next reference to &#8220;foo&#8221; in your text and move your cursor there. From here, we can perform any kind of replacement. For example we could change the word with <code>cw</code> by typing <code>cwbar&lt;Esc></code> to change the word to &#8220;bar&#8221;. Now, we can press <code>n</code> to go to the next &#8220;foo&#8221; match and press <code>.</code> to repeat the same change.</p>
+
+
+
+<p>But <code>gn</code> gives us an even better way. Read the <code>:help gn</code> docs for the full details but here&#8217;s the short summary: Pressing <code>gn</code> will jump forward to the next match of the last used search pattern and visually select it. We can prepend this with <code>c</code> for &#8220;<strong>c</strong>hange&#8221; to get <code>cgn</code> which will find the next match of the previously used search pattern, select it, and enter insert mode. Then we can type our replacement and press <code>&lt;Esc></code>. To repeat this, we only have to press <code>.</code> instead of <code>n</code> and <code>.</code> &#8212; shortening our action to a single key press.</p>
+
+
+
+<p>Watch the demo to see this in action. Here&#8217;s what I do:</p>
+
+
+
+<ul><li><code>/ million</code> &#8211; Finds the first match of &#8221; million&#8221;</li><li><code>cgn</code> &#8211; Changes the next match of my pattern</li><li><code>M USD&lt;Esc></code> &#8211; My replacement pattern</li><li>Then I just press <code>.</code> to repeat it</li></ul>
+
+
+
+<figure class="wp-block-video"><video controls src="https://vimtricks.com/wp-content/uploads/2021/02/go-to-next-match-and-select.mp4"></video></figure>
+
+
+
+<p>There is another variation of this, <code>gN</code>, which does the same thing in reverse. So if you want to change progressively backwards from your cursor position through the file, use that <code>gN</code>.</p>
+
+
+
+<p>You can combine <code>gn</code> with all kinds of other commands, too. Try <code>dgn</code> to delete the next match &#8212; repeatable, of course, with just a dot.</p>
+
+
+
+<p></p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/go-to-next-match-and-select/" data-wpel-link="internal">Go to next match and select</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://vimtricks.com/p/go-to-next-match-and-select/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		<enclosure url="https://vimtricks.com/wp-content/uploads/2021/02/go-to-next-match-and-select.mp4" length="249400" type="video/mp4" />
+
+			</item>
+		<item>
+		<title>Confirm replacements</title>
+		<link>https://vimtricks.com/p/confirm-replacements/</link>
+					<comments>https://vimtricks.com/p/confirm-replacements/#comments</comments>
+		
+		<dc:creator><![CDATA[Colin Bartlett]]></dc:creator>
+		<pubDate>Thu, 11 Feb 2021 12:33:29 +0000</pubDate>
+				<category><![CDATA[Tips and Tricks]]></category>
+		<category><![CDATA[replace]]></category>
+		<guid isPermaLink="false">https://vimtricks.com/?p=930</guid>
+
+					<description><![CDATA[<p>Use the /c flag to confirm each replacement when substituting.</p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/confirm-replacements/" data-wpel-link="internal">Confirm replacements</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Vim has a very robust search and replace capability with the substitution<code> :s</code> command. We&#8217;ve written plenty of <a href="https://vimtricks.com/p/tag/replace/" data-wpel-link="internal">tips about subtitiution</a> before but one I&#8217;ve been using more frequently recently is the <code>/c</code> flag to confirm each replacement.</p>
+
+
+
+<ul><li><code>:%s/foo/bar/c</code> &#8211; <strong>S</strong>ubstitute foo with bar in the whole file but prompt for <strong>C</strong>onfirmation before each replacement.</li></ul>
+
+
+
+<p>With the <code>/c</code> flag appended to your substitution command, Vim will successively iterate over each matching pattern. It will pause to ask you if you want to make each replacement:</p>
+
+
+
+<pre class="wp-block-code"><code>replace with bar (y/n/a/q/l/^E/^Y)?</code></pre>
+
+
+
+<p>There&#8217;s a lot of options there so let&#8217;s enumerate each of them:</p>
+
+
+
+<ul><li><code>y</code> &#8211; <strong>Y</strong>es, make the substitution</li><li><code>n</code> &#8211; <strong>N</strong>o, skip to the next</li><li><code>a</code> &#8211; Replace <strong>A</strong>ll the remaining matches without confirmation</li><li><code>q</code> &#8211; <strong>Q</strong>uit substitution and make no further changes</li><li><code>l</code> &#8211; <strong>L</strong>ast one! Make this change, but quit after this one</li><li><code>^E</code> &#8211; Press <code>&lt;ctrl-e></code> to scroll down in the file and get a better view of the surrounding lines</li><li><code>^Y</code> &#8211; Press <code>&lt;ctrl-y></code> to scroll up</li></ul>
+
+
+
+<figure class="wp-block-video"><video controls src="https://vimtricks.com/wp-content/uploads/2021/02/confirm-replace.mp4"></video></figure>
+
+
+
+<p></p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/confirm-replacements/" data-wpel-link="internal">Confirm replacements</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://vimtricks.com/p/confirm-replacements/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		<enclosure url="https://vimtricks.com/wp-content/uploads/2021/02/confirm-replace.mp4" length="200394" type="video/mp4" />
+
+			</item>
+		<item>
+		<title>Pasting multiple times</title>
+		<link>https://vimtricks.com/p/pasting-multiple-times/</link>
+					<comments>https://vimtricks.com/p/pasting-multiple-times/#comments</comments>
+		
+		<dc:creator><![CDATA[Colin Bartlett]]></dc:creator>
+		<pubDate>Mon, 08 Feb 2021 13:27:07 +0000</pubDate>
+				<category><![CDATA[Tips and Tricks]]></category>
+		<category><![CDATA[registers]]></category>
+		<guid isPermaLink="false">https://vimtricks.com/?p=931</guid>
+
+					<description><![CDATA[<p>Understand Vim registers in order to paste the same text multiple times.</p>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/pasting-multiple-times/" data-wpel-link="internal">Pasting multiple times</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Has this ever happened to you? You have some chunk of text or code and you want to copy and paste it to several places. Maybe you&#8217;re replacing one whole function or method with another. You select the lines and then press <code>y</code> to yank them. Then you move to the new location, select the lines you want to replace and press <code>p</code> to paste over top of them. Now you go to the next spot, highlight the lines you want to paste over and press <code>p</code> again. Instead of your initial text, you get the text you just pasted over top of. Ugh!</p>
+
+
+
+<p>The naive solution is to go back and yank the lines again, paste again, yank again, paste again, etc. <code>y p y p y p</code>&#8230; But there is a better way! There is: paste with <code>"0p</code> instead of just <code>p</code>. But let&#8217;s understand what&#8217;s happening here.</p>
+
+
+
+<p>When yanking (copying) and pasting in Vim, you&#8217;re taking advantage of what Vim calls Registers. Think of these like a set of multiple clipboards, each identifiably by a character (and see <code>:help registers</code> for much more). Except one of those registers is not identifiable by a character and it&#8217;s called the unnamed register. </p>
+
+
+
+<p>Vim automatically stores any text you yank in the unnamed register. That&#8217;s where you paste from when you just use <code>p.</code> But Vim also stores any text you paste over in the unnamed register so by pasting over other text, you&#8217;re clobbering the text that was stored in there. Fortunately, Vim also stores the last text yanked in the register called <code>0</code>. To paste from a register besides the unnamed one, you use a <code>"</code> followed by the register character, followed by <code>p</code>. So <code>"0p</code> will paste from the <code>0</code> register, which automatically contains the last yanked text.</p>
+
+
+
+<p>You can see the contents of your registers at any time with <code>:reg</code>. It&#8217;s really helpful to look at them and see what&#8217;s going on here. I&#8217;ve also includes a demo video.</p>
+
+
+
+<ul><li>When I copy text with <code>y</code>, Vim puts it in the unnamed register <em>and</em> the <code>0</code> register. Both those registers contain the same thing.</li><li>When I paste over with <code>p</code>, Vim puts what I pasted over into the unnamed register but the <code>0</code> register still contains my original yanked text.</li><li>That means that if I paste with <code>p</code>, I&#8217;ll get the last thing I pasted over but if I paste with <code>"0p</code>, then I&#8217;ll paste with the last yanked text. Which is exactly what we want!</li></ul>
+
+
+
+<figure class="wp-block-video"><video controls src="https://vimtricks.com/wp-content/uploads/2021/02/paste-multiple-times.mp4"></video></figure>
+<p>The post <a rel="nofollow" href="https://vimtricks.com/p/pasting-multiple-times/" data-wpel-link="internal">Pasting multiple times</a> appeared first on <a rel="nofollow" href="https://vimtricks.com" data-wpel-link="internal">VimTricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://vimtricks.com/p/pasting-multiple-times/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		<enclosure url="https://vimtricks.com/wp-content/uploads/2021/02/paste-multiple-times.mp4" length="756809" type="video/mp4" />
+
+			</item>
+	</channel>
+</rss>
+`
