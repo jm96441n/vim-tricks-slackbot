@@ -7,6 +7,7 @@ import (
 	"vim-tricks-slackbot/rss"
 	"vim-tricks-slackbot/slack"
 
+	md "github.com/JohannesKaufmann/html-to-markdown"
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
@@ -34,7 +35,9 @@ func main() {
 	client := http.DefaultClient
 	rssReader := rss.NewReader(VimTricksFeedURL, client)
 
-	bot := slack.NewBot()
+	converter := md.NewConverter("", true, nil)
+	formatter := slack.NewMarkdownFormatter(converter)
+	bot := slack.NewBot(formatter)
 	handlerFunc := setupHandler(rssReader, bot)
 	lambda.Start(handlerFunc)
 }
