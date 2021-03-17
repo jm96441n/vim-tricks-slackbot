@@ -37,7 +37,7 @@ func main() {
 
 	converter := md.NewConverter("", true, nil)
 	formatter := slack.NewMarkdownFormatter(converter)
-	bot := slack.NewBot(formatter)
+	bot := slack.NewBot(formatter, client)
 	handlerFunc := setupHandler(rssReader, bot)
 	lambda.Start(handlerFunc)
 }

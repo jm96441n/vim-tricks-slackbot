@@ -1,4 +1,4 @@
-FROM golang:1.16.2-buster as setup
+FROM golang:1.16.2-buster as prd
 WORKDIR /vim-tricks/function
 # build
 ADD . .
