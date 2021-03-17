@@ -1,18 +1,12 @@
-FROM alpine as build
-# install build tools
-RUN apk add go git
-# cache dependencies
-ADD go.mod go.sum ./
-RUN go mod download
+FROM golang:1.16.2-buster as setup
+WORKDIR /vim-tricks/function
 # build
 ADD . .
 RUN go build -o /main
-# copy artifacts to a clean image
-FROM alpine
-COPY --from=build /main /main
-ADD https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie /usr/bin/aws-lambda-rie
-RUN chmod 755 /usr/bin/aws-lambda-rie
-COPY entry.sh /
-RUN chmod 755 /entry.sh
-ENTRYPOINT [ "/entry.sh" ] 
+ENTRYPOINT [ "/aws-lambda/aws-lambda-rie" ]
 CMD [ "/main" ]
+
+FROM golang:1.16.2-buster as test
+WORKDIR /vim-tricks/function
+ADD . .
+CMD [ "go", "test", "./..." ]
