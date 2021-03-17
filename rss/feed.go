@@ -28,6 +28,7 @@ type Item struct {
 	Link        string   `xml:"link"`
 	PubDate     string   `xml:"pubDate"`
 	Description string   `xml:"description"`
+	Content     string   `xml:"encoded"`
 }
 
 // GetLatestItem returns the latest item from the feed if there are items in the list
