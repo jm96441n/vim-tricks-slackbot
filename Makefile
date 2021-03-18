@@ -8,10 +8,8 @@ run:
 	$(MAKE) build
 	docker run --rm \
 		--name $(CONTAINER_NAME) \
-		-v ~/.aws-lambda-rie:/aws-lambda \
 		-p 9000:8080 \
-		jmaguire5588/vim-tricks-bot-lambda:latest \
-		$(cmd)
+		jmaguire5588/vim-tricks-bot-lambda:latest
 
 .PHONY: test
 test:
