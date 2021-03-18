@@ -11,6 +11,7 @@ COPY . .
 RUN go build -o /main
 
 FROM alpine as prd
+WORKDIR /
 COPY --from=compiler /main /main
 COPY --from=builder /entry.sh /entry.sh
 COPY --from=builder /usr/bin/aws-lambda-rie /usr/bin/aws-lambda-rie
