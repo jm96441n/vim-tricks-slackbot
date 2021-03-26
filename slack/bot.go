@@ -57,7 +57,7 @@ func (b Bot) SendMessage(item *rss.Item) error {
 	}
 
 	if resp.StatusCode != http.StatusOK {
-		fmt.Printf("Failed Request with: %s\n", resp)
+		fmt.Printf("Failed Request with: %#v\n", *resp)
 		return fmt.Errorf("Failed Request with: %d", resp.StatusCode)
 	}
 
