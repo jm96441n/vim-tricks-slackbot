@@ -1,13 +1,15 @@
 CONTAINER_NAME=vim-tricks
 .PHONY: build
 build:
-	docker build --target=prd -t jmaguire5588/vim-tricks-bot-lambda:latest ./
+	docker build --target=prd \
+		--build-arg SLACK_TOKEN=${SLACK_TOKEN} \
+		--build-arg VIM_CHANNEL_ID=${VIM_CHANNEL_ID} \
+	-t jmaguire5588/vim-tricks-bot-lambda:latest ./
 
 .PHONY: run
 run:
 	$(MAKE) build
-	docker run --rm \
-		--name $(CONTAINER_NAME) \
+	docker run --rm	--name $(CONTAINER_NAME) \
 		-p 9000:8080 \
 		jmaguire5588/vim-tricks-bot-lambda:latest
 

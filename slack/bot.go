@@ -1,13 +1,11 @@
 package slack
 
 import (
-	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
-	"io"
-	"io/ioutil"
 	"net/http"
+	"net/url"
+	"os"
 	"vim-tricks-slackbot/rss"
 )
 
@@ -15,18 +13,19 @@ type slackFormatter interface {
 	FormatHTMLToMarkdown(string) (string, error)
 }
 
-type httpPoster interface {
-	Post(string, string, io.Reader) (*http.Response, error)
+type httpInteractor interface {
+	Do(req *http.Request) (*http.Response, error)
 }
 
 // Bot handles interaction with slack
 type Bot struct {
-	formatter slackFormatter
-	client    httpPoster
+	formatter    slackFormatter
+	client       httpInteractor
+	vimChannelId string
 }
 
 // NewBot is the constructor for a bot
-func NewBot(formatter slackFormatter, client httpPoster) Bot {
+func NewBot(formatter slackFormatter, client httpInteractor) Bot {
 	return Bot{
 		formatter: formatter,
 		client:    client,
@@ -39,22 +38,29 @@ func (b Bot) SendMessage(item *rss.Item) error {
 	if err != nil {
 		return err
 	}
-	jsonMsg, err := json.Marshal(message)
+	jsonMsg, err := json.Marshal(message.Blocks)
 	if err != nil {
 		return err
 	}
-	fmt.Println(string(jsonMsg))
-	resp, err := b.client.Post("localhost:8000", "application/json", bytes.NewBuffer(jsonMsg))
+	values := url.Values{"blocks": {string(jsonMsg[:])}}
+	url := fmt.Sprintf("https://slack.com/api/chat.postMessage?channel=%s&%s&text=TrickForToday&unfurl_links=false&unfurl_media=false", os.Getenv("VIM_CHANNEL_ID"), values.Encode())
+	req, err := http.NewRequest("POST", url, nil)
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
-	if resp.StatusCode != 200 {
-		b, err := ioutil.ReadAll(resp.Body)
-		if err != nil {
-			return err
-		}
-		return errors.New(string(b))
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", os.Getenv("SLACK_TOKEN")))
+	resp, err := b.client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return err
 	}
+
+	if resp.StatusCode != http.StatusOK {
+		fmt.Printf("Failed Request with: %s\n", resp)
+		return fmt.Errorf("Failed Request with: %d", resp.StatusCode)
+	}
+
 	return nil
 }
 
@@ -63,7 +69,7 @@ var divider = "divider"
 var mkdwn = "mrkdwn"
 
 func (b Bot) buildMessage(item *rss.Item) (Message, error) {
-	m := Message{}
+	m := Message{Channel: os.Getenv("VIM_CHANNEL_ID")}
 	fmtTitle, err := b.formatter.FormatHTMLToMarkdown(item.Title)
 	if err != nil {
 		return m, err
@@ -107,7 +113,8 @@ func (b Bot) buildMessage(item *rss.Item) (Message, error) {
 }
 
 type Message struct {
-	Blocks []Section `json:"blocks"`
+	Channel string
+	Blocks  []Section `json:"blocks"`
 }
 
 type Section struct {

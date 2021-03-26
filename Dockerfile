@@ -15,6 +15,11 @@ WORKDIR /
 COPY --from=compiler /main /main
 COPY --from=builder /entry.sh /entry.sh
 COPY --from=builder /usr/bin/aws-lambda-rie /usr/bin/aws-lambda-rie
+ARG SLACK_TOKEN
+ENV SLACK_TOKEN=$SLACK_TOKEN
+
+ARG VIM_CHANNEL_ID
+ENV VIM_CHANNEL_ID=$VIM_CHANNEL_ID
 ENTRYPOINT [ "/entry.sh" ]
 CMD [ "/main" ]
 
