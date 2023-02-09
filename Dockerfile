@@ -5,7 +5,7 @@ RUN chmod 755 /usr/bin/aws-lambda-rie
 COPY entry.sh /
 RUN chmod 755 /entry.sh
 
-FROM golang:1.16.2-alpine3.13 as compiler
+FROM golang:latest as compiler
 WORKDIR /function
 COPY . .
 RUN go build -o /main
@@ -24,7 +24,7 @@ ENTRYPOINT [ "/entry.sh" ]
 CMD [ "/main" ]
 
 
-FROM golang:1.16.2-buster as test
+FROM golang:latest as test
 WORKDIR /vim-tricks/function
 ADD . .
 CMD [ "go", "test", "./..." ]
